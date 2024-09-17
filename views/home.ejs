@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <style>
+      .container{
+        max-width: 1140px !important;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+      .container h3{
+        margin-top: 45px;
+        font-size: 27px;
+        margin-bottom: 23px;
+      }
+      .list img{
+        height: 20rem;
+        width: 19rem;
+        border-radius: 1rem;
+      }
+      #parent-box {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 20px;
+      }
+      .list p{
+        font-weight: 700;
+        font-size: 20px;
+        padding-left: 10px;
+        padding-top: 8px;
+      }
+    </style>
+</head>
+<body>
+    <%-include("navbar") %>
+
+    
+    <div class="container">
+      <h3>All Blogs</h3>
+      <div id="parent-box"></div>
+    </div>
+
+    <script>
+        fetch("/blog/AllBlog")
+      .then((value) => value.json())
+      .then((data) => {
+        data.map((ele) => {
+          let img = document.createElement("img");
+          img.src = `${ele.img}`;
+          img.setAttribute("class", "img");
+
+          let title = document.createElement("p");
+          title.innerHTML = ele.title;
+          title.setAttribute("class", "title");
+
+          let div = document.createElement("div");  
+          div.append(img, title);
+          div.setAttribute("class", "list");
+
+          document.getElementById("parent-box").append(div);
+
+          div.addEventListener("click", () => {
+            window.location.href = `/blog/singleBlog/${ele._id}`;
+          });
+
+        });
+      });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signle Blog page</title>
+    <link rel="stylesheet" href="../signup.css">
+    <style>
+        img{
+            height: 23rem;
+           width: 23rem;
+           margin: 0 auto;
+           display: block;
+           margin-top: 40px;    
+        }
+        h3{
+            margin: 15px auto;
+            display: block;
+            margin-left: 590px;
+            
+        }
+        h4,p{
+            margin-left: 590px;
+        }
+        .btn-1{
+            display: flex;
+            margin-left: 570px;
+            margin-top: 10px;
+        }
+        button{
+            padding: 8px 27px;
+            font-size: 17px;
+            text-decoration: none;
+            margin-left: 18px;
+            margin-top: 10px;
+        }
+        p{
+            margin-top: 11px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <%-include("navbar") %>
+
+    <img id="img" src="<%= singleBlog.img %>"/>
+    <h3 id="title">Title :- <%= singleBlog.title %></h3>
+    <h4 id="content">Content :- <%= singleBlog.content %></h4>
+    <p id="createdAt">Date :- <%= singleBlog.createdAt.toLocaleDateString()%></p>
+
+   <div class="btn-1">
+    <button> <a href="/blog/<%= singleBlog._id %>/edit">Edit</a></button>
+
+    <form action="/blog/<%= singleBlog._id %>?_method=DELETE" method="post" >
+        <button>Delete</button>
+    </form>
+
+   </div>
+</body>
+</html>
